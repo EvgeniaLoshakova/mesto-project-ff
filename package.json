@@ -1,13 +1,13 @@
 {
   "name": "mesto-project-ff",
   "version": "0.0.1",
-  "description": "https://github.com/EvgeniaLoshakova/mesto-project-ff.git",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
   },
-  "author": "Evgenia Loshakova",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.24.5",

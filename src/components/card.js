@@ -1,3 +1,4 @@
+
 const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".places__item");

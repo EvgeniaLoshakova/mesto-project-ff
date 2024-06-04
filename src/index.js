@@ -3,6 +3,10 @@ import { initialCards } from './scripts/cards.js';
 import { createCard, handleDelete, likeCard } from './components/card.js';
 import { openPopup, closePopup } from './components/modal.js';
 
+const cardTemplate = document
+  .querySelector("#card-template")
+  .content.querySelector(".places__item");
+const placesContainer = document.querySelector(".places__list");
 
 initialCards.forEach((data) => {
   const newCard = createCard(data, handleDelete, openImagePopup, likeCard);
