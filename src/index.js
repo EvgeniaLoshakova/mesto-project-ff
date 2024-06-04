@@ -1,7 +1,7 @@
-import './pages/index.css';
-import { initialCards } from './scripts/cards.js';
-import { createCard, handleDelete, likeCard } from './components/card.js';
-import { openPopup, closePopup } from './components/modal.js';
+import "./pages/index.css";
+import { initialCards } from "./scripts/cards.js";
+import { createCard, handleDelete, likeCard } from "./components/card.js";
+import { openPopup, closePopup } from "./components/modal.js";
 
 const cardTemplate = document
   .querySelector("#card-template")
@@ -22,7 +22,6 @@ const profileAddBtn = document.querySelector(".profile__add-button");
 const popupCloseBtn = document.querySelectorAll(".popup__close");
 const popupList = Array.from(document.querySelectorAll(".popup"));
 
-
 function openImagePopup(cardLink, cardName) {
   const popupTypeImage = document.querySelector(".popup_type_image");
   const popupImage = popupTypeImage.querySelector(".popup__image");
@@ -35,7 +34,7 @@ function openImagePopup(cardLink, cardName) {
   openPopup(popupTypeImage);
 }
 
-profileEditBtn.addEventListener('click', () => {
+profileEditBtn.addEventListener("click", () => {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
   openPopup(popupTypeEdit);
@@ -82,7 +81,9 @@ setEscapeCloseListener();
 
 const editProfileForm = document.querySelector('form[name="edit-profile"]');
 const nameInput = editProfileForm.querySelector(".popup__input_type_name");
-const jobInput = editProfileForm.querySelector(".popup__input_type_description");
+const jobInput = editProfileForm.querySelector(
+  ".popup__input_type_description"
+);
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 
@@ -98,7 +99,9 @@ function submitProfileForm(evt) {
 editProfileForm.addEventListener("submit", submitProfileForm);
 
 const newPlaceForm = document.querySelector('form[name="new-place"]');
-const placeNameInput = newPlaceForm.querySelector(".popup__input_type_card-name");
+const placeNameInput = newPlaceForm.querySelector(
+  ".popup__input_type_card-name"
+);
 const linkInput = newPlaceForm.querySelector(".popup__input_type_url");
 const cardImage = document.querySelector(".card__image");
 const cardTitle = document.querySelector(".card__title");

@@ -1,4 +1,3 @@
-
 const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".places__item");
@@ -6,7 +5,7 @@ const placesContainer = document.querySelector(".places__list");
 
 // Функция создания карточки
 
-export function createCard (data, onDelete, openImagePopup, likeCard) {
+export function createCard(data, onDelete, openImagePopup, likeCard) {
   const newCard = cardTemplate.cloneNode(true);
   const deleteButton = newCard.querySelector(".card__delete-button");
   const cardTitle = newCard.querySelector(".card__title");
@@ -28,14 +27,14 @@ export function createCard (data, onDelete, openImagePopup, likeCard) {
   });
 
   return newCard;
-};
+}
 
 // Функция удаления карточки
 export function handleDelete(card) {
-    card.remove(card);
-  };
+  card.remove(card);
+}
 
 // Функция, обрабатывающая события лайка
- export function likeCard(button) {
-    button.target.classList.toggle("card__like-button_is-active");
-  }
+export function likeCard(button) {
+  button.target.classList.toggle("card__like-button_is-active");
+}
