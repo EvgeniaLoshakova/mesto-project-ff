@@ -53,6 +53,9 @@
               class="popup__input popup__input_type_name"
               placeholder="Имя"
               required
+              minlength="2"
+              maxlength="40"
+              pattern="[A-Za-zА-Яа-яЁё\s\-]"
             />
             <input
               type="text"
@@ -60,6 +63,9 @@
               class="popup__input popup__input_type_description"
               placeholder="Занятие"
               required
+              minlength="2"
+              maxlength="200"
+              pattern="[A-Za-zА-Яа-яЁё\s\-]"
             />
             <button type="submit" class="button popup__button">
               Сохранить
