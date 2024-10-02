@@ -1,2 +1,3 @@
 # Проектная работа Mesto
-https://github.com/EvgeniaLoshakova/mesto-project-ff.git
+
+[Ссылка на проект] (https://github.com/EvgeniaLoshakova/mesto-project-ff.git)cd dev
