@@ -70,7 +70,7 @@ const setEventListeners = (formElement, validationConfig) => {
   const buttonElement = formElement.querySelector(
     validationConfig.submitButtonSelector
   );
-  toggleButtonState(inputList, buttonElement, validationConfig);
+  // toggleButtonState(inputList, buttonElement, validationConfig);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement, validationConfig);
@@ -79,16 +79,15 @@ const setEventListeners = (formElement, validationConfig) => {
   });
 };
 
-// Функция ключения валидации форм
+// Функция включения валидации форм
 export function enableValidation(validationConfig) {
   const formList = Array.from(
     document.querySelectorAll(validationConfig.formSelector)
   );
   formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function (evt) {
-      evt.preventDefault();
+    formElement.addEventListener("submit", function () {
+      setEventListeners(formElement, validationConfig);
     });
-    setEventListeners(formElement, validationConfig);
   });
 }
 
@@ -102,7 +101,6 @@ export function clearValidation(formElement, validationConfig) {
   );
 
   inputList.forEach((inputElement) => {
-    // const errorElement = formElement.querySelector(`#${inputElement.id}-error`)
     hideInputError(formElement, inputElement, validationConfig);
   });
   toggleButtonState(inputList, buttonElement, validationConfig);

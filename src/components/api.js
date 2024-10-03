@@ -25,6 +25,7 @@ export const getUser = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
   }).then(handleResponse);
+  
 };
 
 // Загрузка карточек с сервера

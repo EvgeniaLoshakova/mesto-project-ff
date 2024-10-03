@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-.popup__button.saving {
+.popup__button_saving {
   background: #000;
   color: white;
   cursor: progress;

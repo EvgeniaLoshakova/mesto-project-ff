@@ -12,7 +12,20 @@ export function closePopup(popup) {
 
 // Функция закрытия попапа через Escape
 export function closePopupByEsc(e) {
-  if(e.key === 'Escape') {
-    closePopup(document.querySelector('.popup_is-opened'))
+  if (e.key === "Escape") {
+    closePopup(document.querySelector(".popup_is-opened"));
   }
-}  
+}
+
+export const closePopupByClick = (popups) => {
+  popups.forEach((popup) => {
+    popup.addEventListener("click", (event) => {
+      if (
+        event.target.classList.contains("popup") ||
+        event.target.classList.contains("popup__close")
+      ) {
+        closePopup(popup);
+      }
+    })
+  })
+}
