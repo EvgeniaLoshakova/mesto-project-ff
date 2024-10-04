@@ -26,6 +26,6 @@ export const closePopupByClick = (popups) => {
       ) {
         closePopup(popup);
       }
-    })
-  })
-}
+    });
+  });
+};

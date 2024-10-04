@@ -48,7 +48,9 @@ const placeNameInput = formNewPlace.querySelector(
   ".popup__input_type_card-name"
 );
 const linkInput = formNewPlace.querySelector(".popup__input_type_url");
-const saveBtn = formEditProfile.querySelector(".popup__button");
+const saveProfileBtn = formEditProfile.querySelector(".popup__button");
+const saveAvatarBtn = formNewAvatar.querySelector(".popup__button");
+const savePlaceBtn = formNewPlace.querySelector(".popup__button");
 
 // Текущий пользователь
 let currentUser;
@@ -68,7 +70,7 @@ function setIsLoadingButton(button, text, isLoading) {
     button.textContent = text;
     button.classList.add("popup__button_saving");
   } else {
-    button.textContent = "Сохранить";
+    button.textContent = text;
     button.classList.remove("popup__button_saving");
   }
 }
@@ -98,26 +100,26 @@ Promise.all([getInitialCards(), getUser()])
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  const initialTextBtn = saveBtn.textContent;
-  setIsLoadingButton(saveBtn, "Сохранение...", true);
+  const initialTextBtn = saveProfileBtn.textContent;
+  setIsLoadingButton(saveProfileBtn, "Сохранение...", true);
 
   updateUser(nameInput.value, jobInput.value)
     .then((profileData) => {
       // Заполняем форму редактирования значениями из HTML-страницы
       profileTitle.textContent = nameInput.value;
       profileDescription.textContent = jobInput.value;
-     
+
       profileTitle.textContent = profileData.name;
       profileDescription.textContent = profileData.about;
       profileAvatar.src = profileData.avatar;
       nameInput.value = profileTitle.textContent;
       jobInput.value = profileDescription.textContent;
-      clearValidation(formEditProfile, validationConfig)
+      clearValidation(formEditProfile, validationConfig);
       closePopup(popupTypeEdit);
     })
     .catch(handleError)
     .finally(() => {
-      setIsLoadingButton(saveBtn, initialTextBtn, false)
+      setIsLoadingButton(saveProfileBtn, initialTextBtn, false);
     });
 }
 
@@ -125,10 +127,10 @@ function handleProfileFormSubmit(evt) {
 function handleNewCardFormSubmit(evt) {
   evt.preventDefault();
 
+  const initialTextBtn = savePlaceBtn.textContent;
+  setIsLoadingButton(savePlaceBtn, "Сохранение...", true);
   const nameValue = placeNameInput.value;
   const linkValue = linkInput.value;
-  const initialTextBtn = saveBtn.textContent;
-  setIsLoadingButton(saveBtn, "Сохранение...", true)
 
   addNewCard(nameValue, linkValue)
     .then((newCardData) => {
@@ -141,23 +143,22 @@ function handleNewCardFormSubmit(evt) {
           currentUser._id
         )
       );
-      // formNewPlace.reset();
       clearValidation(formNewPlace, validationConfig);
       closePopup(popupTypeNewCard);
     })
     .catch(handleError)
     .finally(() => {
-      setIsLoadingButton(saveBtn, initialTextBtn, false);
+      setIsLoadingButton(savePlaceBtn, initialTextBtn, false);
     });
 }
 
 // Обновление аватара пользователя
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
-  
+
   const avatarValue = avatarInput.value;
-  const initialTextBtn = saveBtn.textContent;
-  setIsLoadingButton(saveBtn, "Сохранение...", true);
+  const initialTextBtn = saveAvatarBtn.textContent;
+  setIsLoadingButton(saveAvatarBtn, "Сохранение...", true);
 
   updateAvatar(avatarValue)
     .then((avatarData) => {
@@ -166,7 +167,7 @@ function handleAvatarFormSubmit(evt) {
     })
     .catch(handleError)
     .finally(() => {
-      setIsLoadingButton(saveBtn, initialTextBtn, false);
+      setIsLoadingButton(saveAvatarBtn, initialTextBtn, false);
     });
 }
 

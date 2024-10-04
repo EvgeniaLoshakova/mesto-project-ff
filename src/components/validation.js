@@ -70,13 +70,13 @@ const setEventListeners = (formElement, validationConfig) => {
   const buttonElement = formElement.querySelector(
     validationConfig.submitButtonSelector
   );
-  // toggleButtonState(inputList, buttonElement, validationConfig);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement, validationConfig);
       toggleButtonState(inputList, buttonElement, validationConfig);
     });
   });
+  toggleButtonState(inputList, buttonElement, validationConfig);
 };
 
 // Функция включения валидации форм
@@ -85,9 +85,7 @@ export function enableValidation(validationConfig) {
     document.querySelectorAll(validationConfig.formSelector)
   );
   formList.forEach((formElement) => {
-    formElement.addEventListener("submit", function () {
-      setEventListeners(formElement, validationConfig);
-    });
+    setEventListeners(formElement, validationConfig);
   });
 }
 
