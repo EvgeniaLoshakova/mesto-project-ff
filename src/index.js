@@ -3,7 +3,7 @@ import { createCard, handleDelete, likeCard } from "./components/card.js";
 import {
   openPopup,
   closePopup,
-  closePopupByClick,
+  setClosePopupByClickListeners,
   closePopupByEsc,
 } from "./components/modal.js";
 import { enableValidation, clearValidation } from "./components/validation.js";
@@ -66,11 +66,10 @@ function openImagePopup(cardLink, cardName) {
 
 // Функция переключения состояния кнопки Сохранить
 function setIsLoadingButton(button, text, isLoading) {
+  button.textContent = text;
   if (isLoading) {
-    button.textContent = text;
     button.classList.add("popup__button_saving");
   } else {
-    button.textContent = text;
     button.classList.remove("popup__button_saving");
   }
 }
@@ -105,16 +104,8 @@ function handleProfileFormSubmit(evt) {
 
   updateUser(nameInput.value, jobInput.value)
     .then((profileData) => {
-      // Заполняем форму редактирования значениями из HTML-страницы
-      profileTitle.textContent = nameInput.value;
-      profileDescription.textContent = jobInput.value;
-
-      profileTitle.textContent = profileData.name;
-      profileDescription.textContent = profileData.about;
-      profileAvatar.src = profileData.avatar;
-      nameInput.value = profileTitle.textContent;
-      jobInput.value = profileDescription.textContent;
-      clearValidation(formEditProfile, validationConfig);
+      profileData.name = nameInput.value;
+      profileData.about = jobInput.value;
       closePopup(popupTypeEdit);
     })
     .catch(handleError)
@@ -129,6 +120,7 @@ function handleNewCardFormSubmit(evt) {
 
   const initialTextBtn = savePlaceBtn.textContent;
   setIsLoadingButton(savePlaceBtn, "Сохранение...", true);
+
   const nameValue = placeNameInput.value;
   const linkValue = linkInput.value;
 
@@ -143,6 +135,7 @@ function handleNewCardFormSubmit(evt) {
           currentUser._id
         )
       );
+      formNewPlace.reset();
       clearValidation(formNewPlace, validationConfig);
       closePopup(popupTypeNewCard);
     })
@@ -163,6 +156,8 @@ function handleAvatarFormSubmit(evt) {
   updateAvatar(avatarValue)
     .then((avatarData) => {
       profileAvatar.src = avatarData.avatar;
+      formNewAvatar.reset();
+      clearValidation(formNewAvatar, validationConfig);
       closePopup(popupTypeNewAvatar);
     })
     .catch(handleError)
@@ -171,10 +166,7 @@ function handleAvatarFormSubmit(evt) {
     });
 }
 
-closePopupByClick(popupList);
-
-// Открытие попапа для замены аватара
-profileOverlay.addEventListener("click", () => openPopup(popupTypeNewAvatar));
+setClosePopupByClickListeners(popupList);
 
 // Функция добавления класса анимации для попапов
 document.addEventListener("DOMContentLoaded", () => {
@@ -186,8 +178,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Обработчики событий
-btnEditProfile.addEventListener("click", () => openPopup(popupTypeEdit));
+btnEditProfile.addEventListener("click", () => {
+  openPopup(popupTypeEdit);
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileDescription.textContent;
+});
 btnAddCard.addEventListener("click", () => openPopup(popupTypeNewCard));
+profileOverlay.addEventListener("click", () => openPopup(popupTypeNewAvatar));
 formNewAvatar.addEventListener("submit", handleAvatarFormSubmit);
 formNewPlace.addEventListener("submit", handleNewCardFormSubmit);
 formEditProfile.addEventListener("submit", handleProfileFormSubmit);

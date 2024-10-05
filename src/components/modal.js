@@ -17,7 +17,7 @@ export function closePopupByEsc(e) {
   }
 }
 
-export const closePopupByClick = (popups) => {
+export const setClosePopupByClickListeners = (popups) => {
   popups.forEach((popup) => {
     popup.addEventListener("click", (event) => {
       if (
