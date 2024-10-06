@@ -104,8 +104,8 @@ function handleProfileFormSubmit(evt) {
 
   updateUser(nameInput.value, jobInput.value)
     .then((profileData) => {
-      profileData.name = nameInput.value;
-      profileData.about = jobInput.value;
+      profileTitle.textContent = profileData.name;
+      profileDescription.textContent = profileData.about;
       closePopup(popupTypeEdit);
     })
     .catch(handleError)
@@ -180,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Обработчики событий
 btnEditProfile.addEventListener("click", () => {
   openPopup(popupTypeEdit);
+  clearValidation(formEditProfile, validationConfig);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 });
